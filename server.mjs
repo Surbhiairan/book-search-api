@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { Sequelize } from 'sequelize';
 import bookRoutes from './routes/books.mjs';
+import errorHandler from './middleware/errorHandler.mjs';
 
 const app = express();
 const port = 5000;
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api', bookRoutes);
+app.use(errorHandler);
 
 const sequelize = new Sequelize('booksearch', 'username', 'password', {
   host: 'localhost',
